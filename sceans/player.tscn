@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://cn1ekgvxk3vpw"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_i0uhq"]
+[ext_resource type="Texture2D" uid="uid://dpct5rw8o7h8n" path="res://assets/devart-spritesheet.png" id="1_vgvip"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w512p"]
+atlas = ExtResource("1_vgvip")
+region = Rect2(64, 64, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ihl28"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w512p")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_01dvc"]
+radius = 4.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_i0uhq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_ihl28")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_01dvc")
