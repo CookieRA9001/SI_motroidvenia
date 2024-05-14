@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dpct5rw8o7h8n" path="res://assets/devart-spritesheet.png" id="1_02e78"]
 [ext_resource type="PackedScene" uid="uid://cn1ekgvxk3vpw" path="res://sceans/player.tscn" id="2_ixtsi"]
-[ext_resource type="PackedScene" uid="uid://ceakj0idu26ij" path="res://sceans/friendly.tscn" id="3_ttyh0"]
+[ext_resource type="PackedScene" uid="uid://7hxhebt7dcb0" path="res://sceans/friendly_ally.tscn" id="3_sfy7y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qil2c"]
 texture = ExtResource("1_02e78")
@@ -134,17 +134,8 @@ position = Vector2(0, 96)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_y28kg")
 
-[node name="Area2D" parent="." instance=ExtResource("3_ttyh0")]
-position = Vector2(97, 16)
+[node name="Friendly" parent="." instance=ExtResource("3_sfy7y")]
+position = Vector2(93, 16)
 
-[node name="Area2D2" parent="." instance=ExtResource("3_ttyh0")]
-position = Vector2(185, -32)
-
-[node name="Area2D3" parent="." instance=ExtResource("3_ttyh0")]
-position = Vector2(-121, -65)
-
-[node name="Area2D4" parent="." instance=ExtResource("3_ttyh0")]
-position = Vector2(65, -145)
-
-[node name="Area2D5" parent="." instance=ExtResource("3_ttyh0")]
-position = Vector2(256, -128)
+[node name="Friendly2" parent="." instance=ExtResource("3_sfy7y")]
+position = Vector2(179, -32)

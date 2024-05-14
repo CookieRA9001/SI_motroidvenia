@@ -1,28 +1,45 @@
-extends Area2D
+extends CharacterBody2D
 
-enum Status { IDLE, FOLLOWING, INACTION }
+enum Status { IDLE, FOLLOWING, INACTION, MOVING }
 
+@export var jumpY_velocity := -220
+@export var jumpX_velocity := 100
+@export var jumpX_decel := 10
 var friendly_status = Status.IDLE
+var current_x_speed = 0
 var target:Node2D = null
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-func _on_body_entered(body):
-	if friendly_status == Status.IDLE:
-		friendly_status = Status.FOLLOWING
-		target = body
-		
 func follow(delta):
 	if position.distance_to(target.position)>20:
-		position = target.position + Vector2(randf_range(-5.0,5.0),0);
-		
-	pass
+		print("jump")
+		velocity.y = jumpY_velocity
+		var direction = 1 if (target.position.x-position.x > 0) else -1 
+		current_x_speed = direction * clamp(position.distance_to(target.position)*randf_range(1,2), 0, jumpX_velocity)
+		velocity.x = current_x_speed
+		friendly_status = Status.MOVING
+
 	
+func move(delta):
+	if is_on_floor():
+		friendly_status = Status.FOLLOWING
+		velocity.x = 0
+		return
+	else:
+		velocity.x = current_x_speed
+	
+	pass
+
 func idle(delta):
 	pass
 	
 func inAction(delta):
 	pass
 
-func _process(delta):
+func _physics_process(delta):
+	if not is_on_floor():
+		velocity.y += gravity * delta
+	
 	match friendly_status:
 		Status.IDLE:
 			idle(delta)
@@ -30,4 +47,14 @@ func _process(delta):
 			follow(delta)
 		Status.INACTION:
 			inAction(delta)
+		Status.MOVING:
+			move(delta)
+			
+	move_and_slide()
 
+
+func _on_area_2d_body_entered(body):
+	if friendly_status == Status.IDLE:
+		friendly_status = Status.FOLLOWING
+		target = body
+		print("following")
