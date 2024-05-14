@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-enum Status { IDLE, FOLLOWING, INACTION, MOVING }
+enum Status { IDLE, FOLLOWING, INACTION, MOVING, HELD }
 
 @export var jumpY_velocity := -220
 @export var jumpX_velocity := 100
@@ -12,7 +12,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func follow(delta):
 	if position.distance_to(target.position)>20:
-		print("jump")
 		velocity.y = jumpY_velocity
 		var direction = 1 if (target.position.x-position.x > 0) else -1 
 		current_x_speed = direction * clamp(position.distance_to(target.position)*randf_range(1,2), 0, jumpX_velocity)
@@ -36,8 +35,15 @@ func idle(delta):
 func inAction(delta):
 	pass
 
+func hold(delta):
+	if position.distance_to(target.position) > 10:
+		position = position.move_toward(target.position, delta*100)
+	else:
+		position = target.position
+	pass
+
 func _physics_process(delta):
-	if not is_on_floor():
+	if not is_on_floor() and not friendly_status==Status.HELD:
 		velocity.y += gravity * delta
 	
 	match friendly_status:
@@ -49,12 +55,24 @@ func _physics_process(delta):
 			inAction(delta)
 		Status.MOVING:
 			move(delta)
+		Status.HELD:
+			hold(delta)
 			
 	move_and_slide()
 
+func holdMe():
+	friendly_status = Status.HELD
+	pass
+	
+func unholdMe():
+	friendly_status = Status.FOLLOWING
+	velocity = Vector2(randf_range(-50,50),randf_range(-100,-300))
+	pass
 
 func _on_area_2d_body_entered(body):
 	if friendly_status == Status.IDLE:
 		friendly_status = Status.FOLLOWING
 		target = body
-		print("following")
+		
+		if body.has_method("add_friendly"):
+			body.add_friendly(self)
