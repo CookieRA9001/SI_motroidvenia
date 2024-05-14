@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmb6dhip5k0im"]
+[gd_scene load_steps=9 format=3 uid="uid://dmb6dhip5k0im"]
 
 [ext_resource type="Texture2D" uid="uid://dpct5rw8o7h8n" path="res://assets/devart-spritesheet.png" id="1_02e78"]
 [ext_resource type="PackedScene" uid="uid://cn1ekgvxk3vpw" path="res://sceans/player.tscn" id="2_ixtsi"]
 [ext_resource type="PackedScene" uid="uid://7hxhebt7dcb0" path="res://sceans/friendly_ally.tscn" id="3_sfy7y"]
+[ext_resource type="PackedScene" uid="uid://dbpn0r8q4h5q6" path="res://sceans/kill_zone.tscn" id="4_7wdsl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qil2c"]
 texture = ExtResource("1_02e78")
@@ -113,6 +114,8 @@ sources/0 = SubResource("TileSetAtlasSource_qil2c")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_y28kg"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_buseq"]
+
 [node name="Game" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -125,6 +128,8 @@ layer_0/tile_data = PackedInt32Array(131065, 131072, 0, 131066, 131072, 0, 13106
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -7)
 zoom = Vector2(4, 4)
+limit_bottom = 210
+limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 
@@ -133,9 +138,16 @@ position = Vector2(0, 96)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_y28kg")
+disabled = true
 
 [node name="Friendly" parent="." instance=ExtResource("3_sfy7y")]
 position = Vector2(93, 16)
 
 [node name="Friendly2" parent="." instance=ExtResource("3_sfy7y")]
 position = Vector2(179, -32)
+
+[node name="KillZone" parent="." instance=ExtResource("4_7wdsl")]
+position = Vector2(1, 224)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("WorldBoundaryShape2D_buseq")
