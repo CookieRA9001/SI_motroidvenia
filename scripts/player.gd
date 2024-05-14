@@ -50,6 +50,10 @@ func swap_friends():
 			held_friendly.holdMe()
 		return	
 	
+	if held_friendly == null:
+		while held_friendly == null:
+			held_friendly = friendly_found[f_index % len(friendly_found)]
+	
 	var new_f_index = (f_index+1) % len(friendly_found)
 	var next_friendly = friendly_found[new_f_index]
 	while new_f_index!=f_index and position.distance_to(next_friendly.position)>40:
@@ -65,8 +69,7 @@ func swap_friends():
 	held_friendly = next_friendly
 	if held_friendly.has_method("holdMe"):
 		held_friendly.holdMe()
-	
-	pass
+	f_index = new_f_index
 	
 func throw_friends():
 	# TODO: throw held friendly

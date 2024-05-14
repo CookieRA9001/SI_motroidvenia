@@ -11,7 +11,7 @@ var target:Node2D = null
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func follow(delta):
-	if position.distance_to(target.position)>20:
+	if position.distance_to(target.position)>20 and is_on_floor():
 		velocity.y = jumpY_velocity
 		var direction = 1 if (target.position.x-position.x > 0) else -1 
 		current_x_speed = direction * clamp(position.distance_to(target.position)*randf_range(1,2), 0, jumpX_velocity)
