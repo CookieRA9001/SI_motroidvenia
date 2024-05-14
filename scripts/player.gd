@@ -3,12 +3,28 @@ extends CharacterBody2D
 const SPEED = 150.0
 const JUMP_VELOCITY = -300.0
 
+@onready var timer = $hurtbox/Timer
+@onready var animation_timer = $effects/animationTimer
+
+
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var effects = $effects
+
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var held_friendly = null 
 var friendly_found:Array[CharacterBody2D] = []
 var f_index = 0
+
+@export var maxHealth = 3
+@onready var currentHealth: int = maxHealth
+@export var knockbackPower: int = 1000
+
+var isHurt: bool = false
+var enemyCollisions = []
+
+func _ready():
+	effects.play("RESET")
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -34,7 +50,9 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
-	
+	if !isHurt:
+		for enemyArea in enemyCollisions:
+			hurtByEnemy(enemyArea)
 
 func swap_friends():
 	print("swap")
@@ -78,3 +96,38 @@ func throw_friends():
 func add_friendly(friendly:CharacterBody2D):
 	friendly_found.append(friendly)
 
+func hurtByEnemy(area):
+	print_debug(area.get_parent().name)
+	currentHealth -= 1
+	if currentHealth <= 0:
+		print("You died!")
+		hurtBlink()
+		Engine.time_scale = 0.5
+		timer.start()
+		await timer.timeout
+		Engine.time_scale = 1
+		get_tree().reload_current_scene()
+	knockback()
+	hurtBlink()
+
+func _on_hurtbox_area_entered(area):
+	if area.name == "hitBox":
+		enemyCollisions.append(area)
+
+func hurtBlink():
+	isHurt = true
+	effects.play("hurtBlink")
+	animation_timer.start()
+	await animation_timer.timeout
+	effects.play("RESET")
+	isHurt = false
+
+func knockback():
+	var knockbackDirections = -velocity.normalized() * knockbackPower
+	velocity = knockbackDirections
+	move_and_slide()
+
+
+func _on_hurtbox_area_exited(area):
+	enemyCollisions.erase(area)
+	

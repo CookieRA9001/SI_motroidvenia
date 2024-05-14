@@ -1,7 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ds5d0yx6s7rlq"]
 
 [ext_resource type="Texture2D" uid="uid://dpct5rw8o7h8n" path="res://assets/devart-spritesheet.png" id="1_rryyp"]
-[ext_resource type="PackedScene" uid="uid://dbpn0r8q4h5q6" path="res://sceans/kill_zone.tscn" id="2_cvfes"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nwboj"]
 atlas = ExtResource("1_rryyp")
@@ -18,22 +17,29 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pnxhm"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ilxju"]
 size = Vector2(12, 12)
 
-[node name="Enemy" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_0iv1o"]
+radius = 8.0
+
+[node name="Enemy" type="CharacterBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wi0c2")
 animation = &"idle"
-
-[node name="KillZone" parent="." instance=ExtResource("2_cvfes")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
-shape = SubResource("RectangleShape2D_pnxhm")
 
 [node name="RayCastR" type="RayCast2D" parent="."]
 target_position = Vector2(11, 0)
 
 [node name="RayCastL" type="RayCast2D" parent="."]
 target_position = Vector2(-11, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ilxju")
+
+[node name="hitBox" type="Area2D" parent="CollisionShape2D"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/hitBox"]
+shape = SubResource("CircleShape2D_0iv1o")

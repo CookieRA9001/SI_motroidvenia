@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cn1ekgvxk3vpw"]
+[gd_scene load_steps=10 format=3 uid="uid://cn1ekgvxk3vpw"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_i0uhq"]
 [ext_resource type="Texture2D" uid="uid://dpct5rw8o7h8n" path="res://assets/devart-spritesheet.png" id="1_vgvip"]
@@ -21,16 +21,88 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_01dvc"]
 radius = 4.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wiwip"]
+size = Vector2(12, 16)
+
+[sub_resource type="Animation" id="Animation_2mjgb"]
+resource_name = "hurtBlink"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.501961), Color(1, 0, 0, 0.501961), Color(1, 0, 0, 0.501961), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_uwk2d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cgfpn"]
+_data = {
+"RESET": SubResource("Animation_uwk2d"),
+"hurtBlink": SubResource("Animation_2mjgb")
+}
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_i0uhq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+clip_children = 2
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_ihl28")
 animation = &"idle"
 autoplay = "idle"
 
+[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
+offset_left = -19.0
+offset_top = -17.0
+offset_right = 21.0
+offset_bottom = 23.0
+color = Color(1, 0, 0, 0)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_01dvc")
+
+[node name="hurtbox" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_wiwip")
+
+[node name="Timer" type="Timer" parent="hurtbox"]
+wait_time = 0.6
+
+[node name="effects" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cgfpn")
+}
+
+[node name="animationTimer" type="Timer" parent="effects"]
+one_shot = true
+
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="area_exited" from="hurtbox" to="." method="_on_hurtbox_area_exited"]
+[connection signal="timeout" from="hurtbox/Timer" to="." method="_on_timer_timeout"]
