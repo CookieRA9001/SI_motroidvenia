@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmb6dhip5k0im"]
+[gd_scene load_steps=11 format=3 uid="uid://dmb6dhip5k0im"]
 
 [ext_resource type="Texture2D" uid="uid://dpct5rw8o7h8n" path="res://assets/devart-spritesheet.png" id="1_02e78"]
 [ext_resource type="PackedScene" uid="uid://cn1ekgvxk3vpw" path="res://sceans/player.tscn" id="2_ixtsi"]
 [ext_resource type="PackedScene" uid="uid://7hxhebt7dcb0" path="res://sceans/friendly_ally.tscn" id="3_sfy7y"]
 [ext_resource type="PackedScene" uid="uid://dbpn0r8q4h5q6" path="res://sceans/kill_zone.tscn" id="4_7wdsl"]
+[ext_resource type="PackedScene" uid="uid://ds5d0yx6s7rlq" path="res://sceans/enemy.tscn" id="5_g6ttl"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="6_u7j31"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qil2c"]
 texture = ExtResource("1_02e78")
@@ -151,3 +153,7 @@ position = Vector2(1, 224)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
 shape = SubResource("WorldBoundaryShape2D_buseq")
+
+[node name="Enemy" parent="." instance=ExtResource("5_g6ttl")]
+position = Vector2(-85, 8)
+script = ExtResource("6_u7j31")
