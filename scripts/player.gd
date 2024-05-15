@@ -64,30 +64,31 @@ func _physics_process(delta):
 	if is_on_floor() != floored and floored:
 		coyote_timer.start()
 
+## FRIENDLIES
+
 func swap_friends():
 	if len(friendly_found) == 0:
+		print(1)
 		return
 	
 	if len(friendly_found) == 1:
+		print(2)
 		held_friendly = friendly_found[0]
 		if held_friendly.has_method("holdMe"):
 			held_friendly.holdMe()
-		return	
-	
-	if held_friendly == null:
-		while held_friendly == null:
-			held_friendly = friendly_found[f_index % len(friendly_found)]
+		return
 	
 	var new_f_index = (f_index+1) % len(friendly_found)
 	var next_friendly = friendly_found[new_f_index]
-	while new_f_index!=f_index and position.distance_to(next_friendly.position)>100:
+	while new_f_index!=f_index and position.distance_to(next_friendly.position)>120:
 		new_f_index = (new_f_index+1) % len(friendly_found)
 		next_friendly = friendly_found[new_f_index]
 	
-	if new_f_index == f_index:
+	if new_f_index == f_index and position.distance_to(next_friendly.position)>120:
+		print(3)
 		return
 	
-	if held_friendly.has_method("unholdMe"):
+	if held_friendly!=null and held_friendly.has_method("unholdMe"):
 		held_friendly.unholdMe()
 	held_friendly = next_friendly
 	if held_friendly.has_method("holdMe"):
@@ -95,7 +96,6 @@ func swap_friends():
 	f_index = new_f_index
 	
 func throw_friends():
-	# TODO: throw held friendly
 	if held_friendly == null:
 		return
 	
@@ -111,10 +111,11 @@ func throw_friends():
 		held_friendly.throwMe(direction)
 		
 	held_friendly = null
-	f_index = 0
 
 func add_friendly(friendly:CharacterBody2D):
 	friendly_found.append(friendly)
+
+## PAIN
 
 func hurtByEnemy(area:Area2D):
 	#print_debug(area.get_parent().name)
@@ -136,10 +137,6 @@ func hurtByEnemy(area:Area2D):
 	knockback(area)
 	hurtBlink()
 
-func _on_hurtbox_area_entered(area):
-	if area.name == "hitBox":
-		enemyCollisions.append(area)
-
 func hurtBlink():
 	isHurt = true
 	effects.play("hurtBlink")
@@ -152,6 +149,10 @@ func knockback(area:Area2D):
 	var knockbackDirections = (global_position - area.global_position).normalized() * knockbackPower
 	print(knockbackDirections.x)
 	velocity = knockbackDirections
+
+func _on_hurtbox_area_entered(area):
+	if area.name == "hitBox":
+		enemyCollisions.append(area)
 
 func _on_hurtbox_area_exited(area):
 	enemyCollisions.erase(area)
