@@ -120,7 +120,7 @@ position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_ihl28")
 animation = &"run"
 autoplay = "idle"
-frame_progress = 0.50199
+frame_progress = 0.243634
 
 [node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
 offset_left = -50.0
@@ -152,7 +152,9 @@ libraries = {
 wait_time = 0.4
 one_shot = true
 
-[node name="CoyoteTimer" type="Timer" parent="."]
+[node name="Timers" type="Node" parent="."]
+
+[node name="CoyoteTimer" type="Timer" parent="Timers"]
 wait_time = 0.15
 one_shot = true
 

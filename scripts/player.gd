@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var timer = $hurtbox/Timer
 @onready var animation_timer = $effects/animationTimer
-@onready var coyote_timer = $CoyoteTimer
+@onready var coyote_timer = $Timers/CoyoteTimer
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var effects = $effects
 
@@ -15,7 +15,7 @@ var f_index = 0
 @onready var currentHealth: int = maxHealth
 @export var knockbackPower: int = 500
 @export var speed: float = 350
-@export var jumpVelocity: float = -550
+@export var jumpVelocity: float = -700
 
 var isHurt: bool = false
 var enemyCollisions = []

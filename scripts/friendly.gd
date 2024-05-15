@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 enum Status { IDLE, FOLLOWING, INACTION, MOVING, HELD }
 
-@export var jumpY_velocity := -300
+@export var jumpY_velocity := -400
 @export var jumpX_velocity := 200
 @export var jumpX_decel := 10
 var friendly_status = Status.IDLE
