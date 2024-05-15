@@ -5,6 +5,7 @@ enum Status { IDLE, FOLLOWING, INACTION, MOVING, HELD }
 @export var jumpY_velocity := -400
 @export var jumpX_velocity := 200
 @export var jumpX_decel := 10
+@export var throw_force := 1000
 var friendly_status = Status.IDLE
 var current_x_speed = 0
 var target:Node2D = null
@@ -54,6 +55,10 @@ func _physics_process(delta):
 		Status.HELD:
 			hold(delta)
 			
+	var collitions = move_and_collide(velocity * delta)
+	if collitions:
+		velocity.bounce(collitions.get_normal())
+		
 	move_and_slide()
 
 func holdMe():
@@ -63,6 +68,10 @@ func holdMe():
 func unholdMe():
 	friendly_status = Status.FOLLOWING
 	velocity = Vector2(randf_range(-50,50),randf_range(-100,-300))
+	
+func throwMe(dir:Vector2):
+	friendly_status = Status.INACTION
+	velocity = dir * throw_force
 
 func _on_area_2d_body_entered(body):
 	if friendly_status == Status.IDLE:

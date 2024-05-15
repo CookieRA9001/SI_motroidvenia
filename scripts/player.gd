@@ -65,14 +65,10 @@ func _physics_process(delta):
 		coyote_timer.start()
 
 func swap_friends():
-	print("swap")
-	
 	if len(friendly_found) == 0:
-		print("no friends")
 		return
 	
 	if len(friendly_found) == 1:
-		print("1 friends")
 		held_friendly = friendly_found[0]
 		if held_friendly.has_method("holdMe"):
 			held_friendly.holdMe()
@@ -89,7 +85,6 @@ func swap_friends():
 		next_friendly = friendly_found[new_f_index]
 	
 	if new_f_index == f_index:
-		print("no other close friends")
 		return
 	
 	if held_friendly.has_method("unholdMe"):
@@ -101,8 +96,23 @@ func swap_friends():
 	
 func throw_friends():
 	# TODO: throw held friendly
-	pass
+	if held_friendly == null:
+		return
 	
+	var direction = Vector2(1,0)
+	if !animated_sprite.flip_h:
+		direction.x = -1
+	if Input.is_action_pressed("up"):
+		direction.y = 1
+	elif Input.is_action_pressed("down"):
+		direction.y = -1
+	
+	if held_friendly.has_method("throwMe"):
+		held_friendly.throwMe(direction)
+		
+	held_friendly = null
+	f_index = 0
+
 func add_friendly(friendly:CharacterBody2D):
 	friendly_found.append(friendly)
 

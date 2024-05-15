@@ -118,9 +118,9 @@ script = ExtResource("1_i0uhq")
 clip_children = 2
 position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_ihl28")
-animation = &"run"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.243634
+frame_progress = 0.757408
 
 [node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
 offset_left = -50.0
@@ -160,4 +160,3 @@ one_shot = true
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="area_exited" from="hurtbox" to="." method="_on_hurtbox_area_exited"]
-[connection signal="timeout" from="hurtbox/Timer" to="." method="_on_timer_timeout"]
