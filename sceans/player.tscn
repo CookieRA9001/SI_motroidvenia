@@ -1,28 +1,90 @@
-[gd_scene load_steps=10 format=3 uid="uid://cn1ekgvxk3vpw"]
+[gd_scene load_steps=15 format=3 uid="uid://cn1ekgvxk3vpw"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_i0uhq"]
-[ext_resource type="Texture2D" uid="uid://dpct5rw8o7h8n" path="res://assets/devart-spritesheet.png" id="1_vgvip"]
+[ext_resource type="Texture2D" uid="uid://cv0wxefrihgap" path="res://assets/mc-spritesheet-concept.png" id="2_5dmy6"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w512p"]
-atlas = ExtResource("1_vgvip")
-region = Rect2(64, 64, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcyvg"]
+atlas = ExtResource("2_5dmy6")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mgiy"]
+atlas = ExtResource("2_5dmy6")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flfp8"]
+atlas = ExtResource("2_5dmy6")
+region = Rect2(100, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir3v8"]
+atlas = ExtResource("2_5dmy6")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jxyv"]
+atlas = ExtResource("2_5dmy6")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgdve"]
+atlas = ExtResource("2_5dmy6")
+region = Rect2(0, 200, 100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ihl28"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w512p")
+"texture": SubResource("AtlasTexture_fcyvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mgiy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcyvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flfp8")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir3v8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3jxyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir3v8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgdve")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_01dvc"]
-radius = 4.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fotka"]
+radius = 18.0
+height = 68.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wiwip"]
-size = Vector2(12, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_wi137"]
+radius = 15.0
+
+[sub_resource type="Animation" id="Animation_uwk2d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_2mjgb"]
 resource_name = "hurtBlink"
@@ -42,21 +104,6 @@ tracks/0/keys = {
 "values": [Color(1, 0, 0, 0.501961), Color(1, 0, 0, 0.501961), Color(1, 0, 0, 0.501961), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_uwk2d"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cgfpn"]
 _data = {
 "RESET": SubResource("Animation_uwk2d"),
@@ -69,28 +116,29 @@ script = ExtResource("1_i0uhq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 clip_children = 2
-position = Vector2(0, -8)
+position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_ihl28")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
+frame_progress = 0.50199
 
 [node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
-offset_left = -19.0
-offset_top = -17.0
-offset_right = 21.0
-offset_bottom = 23.0
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
 color = Color(1, 0, 0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
-shape = SubResource("CircleShape2D_01dvc")
+shape = SubResource("CapsuleShape2D_fotka")
 
 [node name="hurtbox" type="Area2D" parent="."]
-collision_mask = 3
+position = Vector2(0, 36)
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
-position = Vector2(0, -8)
-shape = SubResource("RectangleShape2D_wiwip")
+position = Vector2(0, -36)
+shape = SubResource("CircleShape2D_wi137")
 
 [node name="Timer" type="Timer" parent="hurtbox"]
 wait_time = 0.6
@@ -101,6 +149,11 @@ libraries = {
 }
 
 [node name="animationTimer" type="Timer" parent="effects"]
+wait_time = 0.4
+one_shot = true
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.15
 one_shot = true
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
