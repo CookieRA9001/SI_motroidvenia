@@ -1,50 +1,165 @@
-[gd_scene load_steps=7 format=3 uid="uid://ds5d0yx6s7rlq"]
+[gd_scene load_steps=16 format=3 uid="uid://ds5d0yx6s7rlq"]
 
-[ext_resource type="Texture2D" uid="uid://dpct5rw8o7h8n" path="res://assets/devart-spritesheet.png" id="1_rryyp"]
+[ext_resource type="Texture2D" uid="uid://qkre32ai2kis" path="res://assets/para_1.png" id="2_f6gcm"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="2_t2yug"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nwboj"]
-atlas = ExtResource("1_rryyp")
-region = Rect2(96, 64, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qf6rf"]
+atlas = ExtResource("2_f6gcm")
+region = Rect2(0, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8cf5"]
+atlas = ExtResource("2_f6gcm")
+region = Rect2(100, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6t2gx"]
+atlas = ExtResource("2_f6gcm")
+region = Rect2(200, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thhcv"]
+atlas = ExtResource("2_f6gcm")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgtma"]
+atlas = ExtResource("2_f6gcm")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjqr6"]
+atlas = ExtResource("2_f6gcm")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ewby"]
+atlas = ExtResource("2_f6gcm")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35wud"]
+atlas = ExtResource("2_f6gcm")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06hi3"]
+atlas = ExtResource("2_f6gcm")
+region = Rect2(200, 100, 100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wi0c2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nwboj")
+"texture": SubResource("AtlasTexture_qf6rf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qf6rf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8cf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6t2gx")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thhcv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgtma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thhcv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjqr6")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ewby")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35wud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06hi3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35wud")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ilxju"]
-size = Vector2(56, 56)
+size = Vector2(28, 62)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rguwd"]
+radius = 23.0
+height = 72.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0iv1o"]
-radius = 32.0156
+radius = 26.0
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("2_t2yug")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_wi0c2")
 animation = &"idle"
+autoplay = "idle"
 
 [node name="RayCastR" type="RayCast2D" parent="."]
-target_position = Vector2(35, 0)
+target_position = Vector2(25, 0)
 
 [node name="RayCastL" type="RayCast2D" parent="."]
-target_position = Vector2(-35, 0)
+target_position = Vector2(-25, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_ilxju")
 
-[node name="hitBox" type="Area2D" parent="CollisionShape2D"]
+[node name="hurtbox" type="Area2D" parent="."]
+position = Vector2(0, 36)
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(0, -31)
+shape = SubResource("CapsuleShape2D_rguwd")
+debug_color = Color(0.744427, 0.420449, 0.525209, 0.42)
+
+[node name="Timer" type="Timer" parent="hurtbox"]
+wait_time = 0.6
+
+[node name="hitBox" type="Area2D" parent="."]
+position = Vector2(0, 10)
 collision_layer = 4
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/hitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+position = Vector2(0, -16)
 shape = SubResource("CircleShape2D_0iv1o")
+debug_color = Color(0.839869, 0.173367, 0.0135019, 0.42)
+
+[node name="TimerAttackCharge" type="Timer" parent="hitBox"]
+wait_time = 0.6
+one_shot = true
+
+[node name="TimerAttackEnd" type="Timer" parent="hitBox"]
+one_shot = true
+
+[node name="RayCastR" type="RayCast2D" parent="hitBox"]
+position = Vector2(0, -10)
+target_position = Vector2(100, 0)
+collision_mask = 2
+
+[node name="RayCastL" type="RayCast2D" parent="hitBox"]
+position = Vector2(0, -10)
+target_position = Vector2(-100, 0)
+collision_mask = 2
+
+[node name="TimerRome" type="Timer" parent="."]
+one_shot = true

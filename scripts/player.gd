@@ -68,11 +68,9 @@ func _physics_process(delta):
 
 func swap_friends():
 	if len(friendly_found) == 0:
-		print(1)
 		return
 	
 	if len(friendly_found) == 1:
-		print(2)
 		held_friendly = friendly_found[0]
 		if held_friendly.has_method("holdMe"):
 			held_friendly.holdMe()
@@ -80,12 +78,11 @@ func swap_friends():
 	
 	var new_f_index = (f_index+1) % len(friendly_found)
 	var next_friendly = friendly_found[new_f_index]
-	while new_f_index!=f_index and position.distance_to(next_friendly.position)>120:
+	while new_f_index!=f_index and position.distance_to(next_friendly.position)>80:
 		new_f_index = (new_f_index+1) % len(friendly_found)
 		next_friendly = friendly_found[new_f_index]
 	
-	if new_f_index == f_index and position.distance_to(next_friendly.position)>120:
-		print(3)
+	if new_f_index == f_index and position.distance_to(next_friendly.position)>80:
 		return
 	
 	if held_friendly!=null and held_friendly.has_method("unholdMe"):
@@ -103,9 +100,11 @@ func throw_friends():
 	if !animated_sprite.flip_h:
 		direction.x = -1
 	if Input.is_action_pressed("up"):
-		direction.y = 1
-	elif Input.is_action_pressed("down"):
+		direction.x = 0
 		direction.y = -1
+	elif Input.is_action_pressed("down"):
+		direction.x = 0
+		direction.y = 1
 	
 	if held_friendly.has_method("throwMe"):
 		held_friendly.throwMe(direction)

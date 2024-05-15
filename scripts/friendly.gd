@@ -15,7 +15,7 @@ func follow(delta):
 	if position.distance_to(target.position)>20 and is_on_floor():
 		velocity.y = jumpY_velocity
 		var direction = 1 if (target.position.x-position.x > 0) else -1 
-		current_x_speed = direction * clamp(position.distance_to(target.position)*randf_range(1,2), 0, jumpX_velocity)
+		current_x_speed = direction * clamp(position.distance_to(target.position)*randf_range(1,3), 0, jumpX_velocity)
 		velocity.x = current_x_speed
 		friendly_status = Status.MOVING
 
@@ -34,15 +34,11 @@ func inAction(delta):
 	var collision = move_and_collide(velocity * delta * 2)
 	if collision:
 		velocity = velocity.bounce(collision.get_normal()) * 0.75
-	
-	if is_on_floor():
-		velocity.x -= velocity.x/abs(velocity.x) * delta * 5
-	
-	if abs(velocity.x)+abs(velocity.y) < 1:
-		friendly_status = Status.MOVING
+		if abs(velocity.x)+abs(velocity.y) < 15:
+			friendly_status = Status.MOVING
 
 func hold(delta):
-	if position.distance_to(target.position) > 20:
+	if position.distance_to(target.position) > 50:
 		position = position.move_toward(target.position, delta*300)
 	else:
 		position = target.position
@@ -62,8 +58,9 @@ func _physics_process(delta):
 			move(delta)
 		Status.HELD:
 			hold(delta)
-		
-	move_and_slide()
+			
+	if friendly_status != Status.INACTION:
+		move_and_slide()
 
 func holdMe():
 	velocity = Vector2(0,0);

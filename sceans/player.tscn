@@ -139,6 +139,7 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2(0, -36)
 shape = SubResource("CircleShape2D_wi137")
+debug_color = Color(0.849361, 0.337696, 0.427188, 0.42)
 
 [node name="Timer" type="Timer" parent="hurtbox"]
 wait_time = 0.6
