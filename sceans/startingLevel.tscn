@@ -9328,4 +9328,4 @@ position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 
 [node name="Friendly" parent="." instance=ExtResource("4_t6vhu")]
-position = Vector2(-284, 580)
+position = Vector2(-82, 22)
