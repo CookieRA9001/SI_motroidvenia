@@ -1,21 +1,35 @@
-[gd_scene load_steps=7 format=3 uid="uid://7hxhebt7dcb0"]
+[gd_scene load_steps=9 format=3 uid="uid://7hxhebt7dcb0"]
 
 [ext_resource type="Script" path="res://scripts/friendly.gd" id="1_5gja5"]
-[ext_resource type="Texture2D" uid="uid://dpct5rw8o7h8n" path="res://assets/devart-spritesheet.png" id="1_16wun"]
+[ext_resource type="Texture2D" uid="uid://b44evsb1m074r" path="res://assets/friendly-star-spritesheet-concept.png" id="2_g3uam"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yquu3"]
-atlas = ExtResource("1_16wun")
-region = Rect2(48, 64, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_s16g8"]
+atlas = ExtResource("2_g3uam")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3l0bp"]
+atlas = ExtResource("2_g3uam")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5kij"]
+atlas = ExtResource("2_g3uam")
+region = Rect2(200, 100, 100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hif36"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yquu3")
+"texture": SubResource("AtlasTexture_s16g8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3l0bp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5kij")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 3.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kbild"]
@@ -29,10 +43,9 @@ collision_layer = 4
 script = ExtResource("1_5gja5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_hif36")
 animation = &"idle"
-autoplay = "idle"
+frame_progress = 0.0787824
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kbild")
