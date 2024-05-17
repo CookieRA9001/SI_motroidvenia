@@ -46,7 +46,7 @@ script = ExtResource("1_5gja5")
 sprite_frames = SubResource("SpriteFrames_hif36")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.377219
+frame_progress = 0.0842759
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kbild")
