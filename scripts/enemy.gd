@@ -102,10 +102,6 @@ func hurtBlink():
 	await animation_timer.timeout
 	effects.play("RESET")
 
-func knockback(area:Area2D):
-	var knockbackDirections = (global_position - area.global_position).normalized() * knockbackPower
-	print(knockbackDirections.x)
-	velocity = knockbackDirections
 	
 func _on_hurtbox_area_entered(area):
 	if area == $hitBox: return
@@ -115,6 +111,5 @@ func _on_hurtbox_area_entered(area):
 		if currentHealth <= 0:
 			queue_free()
 			return
-		knockback(area)
 		hurtBlink()
 
