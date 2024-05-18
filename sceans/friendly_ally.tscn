@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://7hxhebt7dcb0"]
+[gd_scene load_steps=21 format=3 uid="uid://7hxhebt7dcb0"]
 
 [ext_resource type="Script" path="res://scripts/friendly.gd" id="1_5gja5"]
 [ext_resource type="Texture2D" uid="uid://b44evsb1m074r" path="res://assets/friendly-star-spritesheet-concept.png" id="2_g3uam"]
@@ -84,9 +84,6 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kbild"]
-radius = 24.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xwlfk"]
 size = Vector2(128, 71)
 
@@ -152,6 +149,12 @@ _data = {
 "trown": SubResource("Animation_nft68")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_kbild"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dv0p2"]
+radius = 24.0208
+
 [node name="Friendly" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_5gja5")
@@ -161,9 +164,6 @@ visible = false
 sprite_frames = SubResource("SpriteFrames_hif36")
 animation = &"idle"
 frame_progress = 0.970099
-
-[node name="Hitbox" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_kbild")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
@@ -184,6 +184,16 @@ position = Vector2(-1, 4)
 texture = ExtResource("2_g3uam")
 hframes = 3
 vframes = 3
-frame = 4
+frame = 5
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kbild")
+
+[node name="Projectile" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="Projectile" type="CollisionShape2D" parent="Projectile"]
+shape = SubResource("CircleShape2D_dv0p2")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
