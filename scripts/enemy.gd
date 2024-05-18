@@ -28,6 +28,7 @@ var path_l: bool = true
 var allyCollisions = []
 func _ready():
 	hitbox_collision_shape.disabled = true
+	$zombie.play()
 
 func _process(delta):
 	velocity.x = move_toward(velocity.x,0,delta)

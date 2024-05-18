@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://ds5d0yx6s7rlq"]
+[gd_scene load_steps=20 format=3 uid="uid://ds5d0yx6s7rlq"]
 
 [ext_resource type="Texture2D" uid="uid://qkre32ai2kis" path="res://assets/para_1.png" id="2_f6gcm"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="2_t2yug"]
+[ext_resource type="AudioStream" uid="uid://bdpj3hsvuaotx" path="res://assets/zombies-79561.mp3" id="3_hd0pl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qf6rf"]
 atlas = ExtResource("2_f6gcm")
@@ -226,5 +227,10 @@ libraries = {
 [node name="animationTimer" type="Timer" parent="effects"]
 wait_time = 0.4
 one_shot = true
+
+[node name="zombie" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_hd0pl")
+volume_db = -0.533
+max_distance = 300.0
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

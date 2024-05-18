@@ -35,6 +35,7 @@ func inAction(delta):
 	if collision:
 		animation_player.play("trown")
 		velocity = velocity.bounce(collision.get_normal()) * 0.75
+		$bounce.play()
 		if abs(velocity.x)+abs(velocity.y) < 15:
 			friendly_status = Status.MOVING
 
@@ -68,6 +69,7 @@ func holdMe():
 	velocity = Vector2(0,0);
 	friendly_status = Status.HELD
 	animation_player.play("hold")
+	$Hold.play()
 	
 func unholdMe():
 	friendly_status = Status.FOLLOWING

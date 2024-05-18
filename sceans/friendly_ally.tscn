@@ -1,7 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://7hxhebt7dcb0"]
+[gd_scene load_steps=23 format=3 uid="uid://7hxhebt7dcb0"]
 
 [ext_resource type="Script" path="res://scripts/friendly.gd" id="1_5gja5"]
 [ext_resource type="Texture2D" uid="uid://b44evsb1m074r" path="res://assets/friendly-star-spritesheet-concept.png" id="2_g3uam"]
+[ext_resource type="AudioStream" uid="uid://fxb5h7xlm7xr" path="res://assets/baby-squeak-toy-2-183912.mp3" id="3_x2nw1"]
+[ext_resource type="AudioStream" uid="uid://dqfbg1telw5f1" path="res://assets/cartoon-yoink-1-183915.mp3" id="4_8pw3f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uky2n"]
 atlas = ExtResource("2_g3uam")
@@ -189,11 +191,19 @@ frame = 5
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kbild")
 
+[node name="bounce" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_x2nw1")
+volume_db = -6.603
+
 [node name="Projectile" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 0
 
 [node name="Projectile" type="CollisionShape2D" parent="Projectile"]
 shape = SubResource("CircleShape2D_dv0p2")
+
+[node name="Hold" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_8pw3f")
+volume_db = -6.933
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
