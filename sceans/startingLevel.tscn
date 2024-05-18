@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=22 format=3 uid="uid://d2a8rwlnesfpe"]
+=======
+[gd_scene load_steps=23 format=3 uid="uid://d2a8rwlnesfpe"]
+>>>>>>> 37b1dd21085e88115f38ae18d5577f0b49b5e775
 
 [ext_resource type="Texture2D" uid="uid://bc84ecg3ecvm" path="res://assets/tileset_ig_1.png" id="1_awxv7"]
 [ext_resource type="Texture2D" uid="uid://bwps4se7ycnmq" path="res://assets/lamp_floor_tileset.png" id="2_xka87"]
@@ -17,7 +21,11 @@
 [ext_resource type="PackedScene" uid="uid://dnag1x08k0ms3" path="res://sceans/objects/obj16.tscn" id="15_givrl"]
 [ext_resource type="PackedScene" uid="uid://coe3uxbeqlyvj" path="res://sceans/objects/obj6.tscn" id="16_j0yp0"]
 [ext_resource type="PackedScene" uid="uid://ds5d0yx6s7rlq" path="res://sceans/enemy.tscn" id="17_qh1kq"]
+<<<<<<< HEAD
 [ext_resource type="Texture2D" uid="uid://daxuc7xna2e2s" path="res://assets/1_sky.png" id="18_ehpnt"]
+=======
+[ext_resource type="PackedScene" uid="uid://dbpn0r8q4h5q6" path="res://sceans/kill_zone.tscn" id="18_oiqg5"]
+>>>>>>> 37b1dd21085e88115f38ae18d5577f0b49b5e775
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_grjpa"]
 texture = ExtResource("1_awxv7")
@@ -9324,6 +9332,8 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_grjpa")
 sources/1 = SubResource("TileSetAtlasSource_oy4n0")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gvj57"]
+
 [node name="Level1" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -9417,8 +9427,17 @@ position = Vector2(-243, 574)
 [node name="Friendly4" parent="." instance=ExtResource("4_t6vhu")]
 position = Vector2(5068, 1423)
 
+<<<<<<< HEAD
 [node name="1Sky" type="Sprite2D" parent="."]
 z_index = -2
 position = Vector2(2769, 904)
 scale = Vector2(17.3125, 9.23)
 texture = ExtResource("18_ehpnt")
+=======
+[node name="KillZone" parent="." instance=ExtResource("18_oiqg5")]
+position = Vector2(1, 224)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+position = Vector2(307, 2083)
+shape = SubResource("WorldBoundaryShape2D_gvj57")
+>>>>>>> 37b1dd21085e88115f38ae18d5577f0b49b5e775
