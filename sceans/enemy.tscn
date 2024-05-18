@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ds5d0yx6s7rlq"]
+[gd_scene load_steps=19 format=3 uid="uid://ds5d0yx6s7rlq"]
 
 [ext_resource type="Texture2D" uid="uid://qkre32ai2kis" path="res://assets/para_1.png" id="2_f6gcm"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="2_t2yug"]
@@ -103,14 +103,61 @@ height = 72.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_0iv1o"]
 radius = 26.0
 
+[sub_resource type="Animation" id="Animation_uwk2d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2mjgb"]
+resource_name = "hurtBlink"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.501961), Color(1, 0, 0, 0.501961), Color(1, 0, 0, 0.501961), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cgfpn"]
+_data = {
+"RESET": SubResource("Animation_uwk2d"),
+"hurtBlink": SubResource("Animation_2mjgb")
+}
+
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("2_t2yug")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+clip_children = 2
 sprite_frames = SubResource("SpriteFrames_wi0c2")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+color = Color(1, 0, 0, 0)
 
 [node name="RayCastR" type="RayCast2D" parent="."]
 target_position = Vector2(25, 0)
@@ -123,7 +170,8 @@ position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_ilxju")
 
 [node name="hurtbox" type="Area2D" parent="."]
-position = Vector2(0, 36)
+position = Vector2(1, 36)
+collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
@@ -163,3 +211,14 @@ collision_mask = 2
 
 [node name="TimerRome" type="Timer" parent="."]
 one_shot = true
+
+[node name="effects" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cgfpn")
+}
+
+[node name="animationTimer" type="Timer" parent="effects"]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
