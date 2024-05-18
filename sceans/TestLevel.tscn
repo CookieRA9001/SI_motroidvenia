@@ -6,7 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://7hxhebt7dcb0" path="res://sceans/friendly_ally.tscn" id="3_sfy7y"]
 [ext_resource type="PackedScene" uid="uid://dbpn0r8q4h5q6" path="res://sceans/kill_zone.tscn" id="4_7wdsl"]
 [ext_resource type="PackedScene" uid="uid://ds5d0yx6s7rlq" path="res://sceans/enemy.tscn" id="5_g6ttl"]
+<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://cedgmc30eu42y" path="res://sceans/bag.tscn" id="6_y1c4e"]
+=======
+[ext_resource type="PackedScene" path="res://sceans/objects/bag.tscn" id="6_y1c4e"]
+>>>>>>> fdf2e1f3aa9eb0b176836cce945fb53dccdfc0c8
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qil2c"]
 texture = ExtResource("1_02e78")
