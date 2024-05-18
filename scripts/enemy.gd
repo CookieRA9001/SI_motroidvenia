@@ -8,7 +8,7 @@ var rome_states = [EnemyStates.IDLE, EnemyStates.MOVE, EnemyStates.MOVE]
 @onready var animation_timer = $effects/animationTimer
 @onready var effects = $effects
 @onready var currentHealth: int = maxHealth
-@export var knockbackPower: int = 100
+@onready var timer = $hurtbox/Timer
 @export var speed = 60
 @export var attack_dash = 200
 @export var maxHealth = 2
@@ -99,6 +99,7 @@ func attack():
 	
 func hurtBlink():
 	effects.play("hurtBlink")
+	$hurt.play()
 	animation_timer.start()
 	await animation_timer.timeout
 	effects.play("RESET")
@@ -109,8 +110,10 @@ func _on_hurtbox_area_entered(area):
 	if area.name == "Projectile":
 		allyCollisions.append(area)
 		currentHealth -= 1
-		$hurt.play()
 		if currentHealth <= 0:
+			hurtBlink()
+			timer.start()
+			await timer.timeout
 			queue_free()
 			return
 		hurtBlink()

@@ -188,7 +188,7 @@ shape = SubResource("CapsuleShape2D_rguwd")
 debug_color = Color(0.744427, 0.420449, 0.525209, 0.42)
 
 [node name="Timer" type="Timer" parent="hurtbox"]
-wait_time = 0.6
+wait_time = 0.4
 
 [node name="hitBox" type="Area2D" parent="."]
 position = Vector2(0, 10)
@@ -223,6 +223,7 @@ one_shot = true
 [node name="hurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_pvo4b")
 volume_db = -6.933
+max_distance = 500.0
 
 [node name="effects" type="AnimationPlayer" parent="."]
 libraries = {
