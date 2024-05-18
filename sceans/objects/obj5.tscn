@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8l8yja8lm1yj"]
+
+[ext_resource type="Texture2D" uid="uid://bc84ecg3ecvm" path="res://assets/tileset_ig_1.png" id="1_5rc7h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urq7k"]
+atlas = ExtResource("1_5rc7h")
+region = Rect2(400.173, 204.055, 93.6776, 96.8638)
+
+[node name="TeadyBear" type="Sprite2D"]
+z_index = -1
+position = Vector2(122, 14)
+texture = SubResource("AtlasTexture_urq7k")
