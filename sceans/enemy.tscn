@@ -166,10 +166,10 @@ target_position = Vector2(25, 0)
 target_position = Vector2(-25, 0)
 
 [node name="RayCastRD" type="RayCast2D" parent="."]
-target_position = Vector2(96, 53)
+target_position = Vector2(57, 58)
 
 [node name="RayCastLD" type="RayCast2D" parent="."]
-target_position = Vector2(-86, 52)
+target_position = Vector2(-58, 58)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 10)
