@@ -10,7 +10,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var held_friendly = null 
 var friendly_found:Array[CharacterBody2D] = []
 var f_index = 0
-
+@export var BoostPower: int = 1000
 @export var maxHealth = 3
 @onready var currentHealth: int = maxHealth
 @export var knockbackPower: int = 500
@@ -108,6 +108,8 @@ func throw_friends():
 	
 	if held_friendly.has_method("throwMe"):
 		held_friendly.throwMe(direction)
+		var boost = velocity.normalized() * BoostPower
+		velocity = boost
 		
 	held_friendly = null
 
