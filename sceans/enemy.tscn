@@ -165,6 +165,12 @@ target_position = Vector2(25, 0)
 [node name="RayCastL" type="RayCast2D" parent="."]
 target_position = Vector2(-25, 0)
 
+[node name="RayCastRD" type="RayCast2D" parent="."]
+target_position = Vector2(96, 53)
+
+[node name="RayCastLD" type="RayCast2D" parent="."]
+target_position = Vector2(-86, 52)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_ilxju")
