@@ -109,6 +109,7 @@ func _on_hurtbox_area_entered(area):
 	if area.name == "Projectile":
 		allyCollisions.append(area)
 		currentHealth -= 1
+		$hurt.play()
 		if currentHealth <= 0:
 			queue_free()
 			return

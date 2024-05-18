@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://ds5d0yx6s7rlq"]
+[gd_scene load_steps=21 format=3 uid="uid://ds5d0yx6s7rlq"]
 
 [ext_resource type="Texture2D" uid="uid://qkre32ai2kis" path="res://assets/para_1.png" id="2_f6gcm"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="2_t2yug"]
 [ext_resource type="AudioStream" uid="uid://bdpj3hsvuaotx" path="res://assets/zombies-79561.mp3" id="3_hd0pl"]
+[ext_resource type="AudioStream" uid="uid://7egw5rqtubli" path="res://assets/hurt_c_08-102842.mp3" id="3_pvo4b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qf6rf"]
 atlas = ExtResource("2_f6gcm")
@@ -218,6 +219,10 @@ collision_mask = 2
 
 [node name="TimerRome" type="Timer" parent="."]
 one_shot = true
+
+[node name="hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_pvo4b")
+volume_db = -6.933
 
 [node name="effects" type="AnimationPlayer" parent="."]
 libraries = {

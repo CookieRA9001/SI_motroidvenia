@@ -122,7 +122,7 @@ func hurtByEnemy(area:Area2D):
 	#print_debug(area.get_parent().name)
 	currentHealth -= 1
 	animated_sprite.play("idle") # TODO: switch to damage animation, if added?
-	
+	$hurt.play()
 	if currentHealth <= 0:
 		print("You died!")
 		isHurt = true
