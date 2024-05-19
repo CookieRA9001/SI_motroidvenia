@@ -1446,7 +1446,7 @@ volume_db = -20.8
 autoplay = true
 
 [node name="Player" parent="." instance=ExtResource("3_x3ske")]
-position = Vector2(11471, 2285)
+position = Vector2(-755, -99)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-2, 0)
@@ -1694,23 +1694,5 @@ layer = 3
 [node name="Boss" parent="." instance=ExtResource("38_a1r5f")]
 position = Vector2(11855, 2220)
 
-[node name="Friendly5" parent="." instance=ExtResource("4_t6vhu")]
-position = Vector2(3447, 1887)
-
-[node name="Friendly6" parent="." instance=ExtResource("4_t6vhu")]
-position = Vector2(11251, 2371)
-
-[node name="Friendly7" parent="." instance=ExtResource("4_t6vhu")]
-position = Vector2(11260, 2276)
-
-[node name="Friendly8" parent="." instance=ExtResource("4_t6vhu")]
-position = Vector2(11260, 2194)
-
-[node name="Friendly9" parent="." instance=ExtResource("4_t6vhu")]
-position = Vector2(11368, 2370)
-
-[node name="Friendly10" parent="." instance=ExtResource("4_t6vhu")]
-position = Vector2(11373, 2277)
-
-[node name="Friendly11" parent="." instance=ExtResource("4_t6vhu")]
-position = Vector2(11371, 2192)
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
