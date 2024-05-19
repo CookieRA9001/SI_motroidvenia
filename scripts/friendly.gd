@@ -14,6 +14,10 @@ var target:Node2D = null
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func follow():
+	if position.distance_to(target.position) > 500:
+		friendly_status = Status.FLYBACK
+		velocity = Vector2.ZERO
+	
 	if position.distance_to(target.position)>20 and is_on_floor():
 		velocity.y = jumpY_velocity
 		$jump.play()
