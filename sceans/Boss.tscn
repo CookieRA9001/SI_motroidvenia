@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/Boss.gd" id="1_0bkwq"]
 [ext_resource type="Texture2D" uid="uid://qkre32ai2kis" path="res://assets/para_1.png" id="2_hk36j"]
-[ext_resource type="AudioStream" path="res://assets/hurt_c_08-102842.mp3" id="3_gqimp"]
-[ext_resource type="AudioStream" path="res://assets/zombies-79561.mp3" id="4_swe3l"]
+[ext_resource type="AudioStream" uid="uid://7egw5rqtubli" path="res://assets/audio/hurt_c_08-102842.mp3" id="3_ijcq6"]
+[ext_resource type="AudioStream" uid="uid://bdpj3hsvuaotx" path="res://assets/audio/zombies-79561.mp3" id="4_s0qrf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qf6rf"]
 atlas = ExtResource("2_hk36j")
@@ -225,7 +225,7 @@ collision_mask = 2
 one_shot = true
 
 [node name="hurt" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_gqimp")
+stream = ExtResource("3_ijcq6")
 volume_db = -6.933
 max_distance = 500.0
 
@@ -239,7 +239,7 @@ wait_time = 0.4
 one_shot = true
 
 [node name="zombie" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_swe3l")
+stream = ExtResource("4_s0qrf")
 volume_db = -0.533
 max_distance = 300.0
 
