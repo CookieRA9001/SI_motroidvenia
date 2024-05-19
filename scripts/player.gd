@@ -72,7 +72,7 @@ func swap_friends():
 	
 	if len(friendly_found) == 1:
 		held_friendly = friendly_found[0]
-		if held_friendly.has_method("holdMe"):
+		if held_friendly.has_method("holdMe") and position.distance_to(held_friendly.position)<80:
 			held_friendly.holdMe()
 		return
 	
@@ -105,11 +105,10 @@ func throw_friends():
 	elif Input.is_action_pressed("down"):
 		direction.x = 0
 		direction.y = 1
+		velocity.y = -BoostPower
 	
 	if held_friendly.has_method("throwMe"):
 		held_friendly.throwMe(direction)
-		var boost = velocity.normalized() * BoostPower
-		velocity = boost
 		
 	held_friendly = null
 
@@ -124,7 +123,7 @@ func hurtByEnemy(area:Area2D):
 	animated_sprite.play("idle") # TODO: switch to damage animation, if added?
 	$hurt.play()
 	if currentHealth <= 0:
-		print("You died!")
+		#print("You died!")
 		isHurt = true
 		knockback(area)
 		Engine.time_scale = 0.5
@@ -148,7 +147,7 @@ func hurtBlink():
 
 func knockback(area:Area2D):
 	var knockbackDirections = (global_position - area.global_position).normalized() * knockbackPower
-	print(knockbackDirections.x)
+	#print(knockbackDirections.x)
 	velocity = knockbackDirections
 
 func _on_hurtbox_area_entered(area):

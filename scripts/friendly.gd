@@ -67,10 +67,11 @@ func _physics_process(delta):
 		move_and_slide()
 
 func holdMe():
+	if friendly_status != Status.HELD:
+		$Hold.play()
+		animation_player.play("hold")
 	velocity = Vector2(0,0);
 	friendly_status = Status.HELD
-	animation_player.play("hold")
-	$Hold.play()
 	
 func unholdMe():
 	friendly_status = Status.FOLLOWING
