@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 enum Status { IDLE, FOLLOWING, INACTION, MOVING, HELD }
 @onready var animation_player = $AnimationPlayer
+@onready var projectile = $Projectile/Projectile
 @export var jumpY_velocity := -400
 @export var jumpX_velocity := 200
 @export var jumpX_decel := 10
@@ -11,7 +12,7 @@ var current_x_speed = 0
 var target:Node2D = null
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-func follow(delta):
+func follow():
 	if position.distance_to(target.position)>20 and is_on_floor():
 		velocity.y = jumpY_velocity
 		$jump.play()
@@ -20,7 +21,7 @@ func follow(delta):
 		velocity.x = current_x_speed
 		friendly_status = Status.MOVING
 
-func move(delta):
+func move():
 	if is_on_floor():
 		friendly_status = Status.FOLLOWING
 		velocity.x = 0
@@ -28,7 +29,7 @@ func move(delta):
 	else:
 		velocity.x = current_x_speed
 
-func idle(delta):
+func idle():
 	pass
 	
 func inAction(delta):
@@ -53,13 +54,13 @@ func _physics_process(delta):
 	
 	match friendly_status:
 		Status.IDLE:
-			idle(delta)
+			idle()
 		Status.FOLLOWING:
-			follow(delta)
+			follow()
 		Status.INACTION:
 			inAction(delta)
 		Status.MOVING:
-			move(delta)
+			move()
 		Status.HELD:
 			hold(delta)
 			

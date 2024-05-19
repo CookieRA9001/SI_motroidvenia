@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dnag1x08k0ms3" path="res://sceans/objects/obj16.tscn" id="15_givrl"]
 [ext_resource type="PackedScene" uid="uid://coe3uxbeqlyvj" path="res://sceans/objects/obj6.tscn" id="16_j0yp0"]
 [ext_resource type="PackedScene" uid="uid://ds5d0yx6s7rlq" path="res://sceans/enemy.tscn" id="17_qh1kq"]
-[ext_resource type="AudioStream" uid="uid://sxqtqtimm4uq" path="res://assets/8bit_active.mp3" id="18_557ul"]
+[ext_resource type="AudioStream" uid="uid://d4mdggqv752s7" path="res://assets/cool reverb.mp3" id="18_1ngsg"]
 [ext_resource type="PackedScene" uid="uid://dbpn0r8q4h5q6" path="res://sceans/kill_zone.tscn" id="18_oiqg5"]
 [ext_resource type="Texture2D" uid="uid://daxuc7xna2e2s" path="res://assets/1_sky.png" id="19_b60n8"]
 [ext_resource type="PackedScene" uid="uid://coi737exa7yep" path="res://sceans/objects/obj25.tscn" id="21_2ofx2"]
@@ -1501,7 +1501,7 @@ position = Vector2(-243, 574)
 position = Vector2(5068, 1423)
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("18_557ul")
+stream = ExtResource("18_1ngsg")
 volume_db = -20.8
 autoplay = true
 
