@@ -104,6 +104,6 @@ func _on_hurtbox_area_entered(area):
 		hurtBlink()
 
 func _on_killally_body_entered(body):
-	print(body)
+	body.target.remove_friendly(body)
 	body.queue_free()
 

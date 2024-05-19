@@ -79,7 +79,7 @@ func swap_friends():
 	
 	var new_f_index = (f_index+1) % len(friendly_found)
 	var next_friendly = friendly_found[new_f_index]
-	while new_f_index!=f_index and position.distance_to(next_friendly.position)>80:
+	while new_f_index!=f_index and (next_friendly==null or position.distance_to(next_friendly.position)>80):
 		new_f_index = (new_f_index+1) % len(friendly_found)
 		next_friendly = friendly_found[new_f_index]
 	
@@ -115,6 +115,9 @@ func throw_friends():
 
 func add_friendly(friendly:CharacterBody2D):
 	friendly_found.append(friendly)
+
+func remove_friendly(friendly:CharacterBody2D):
+	friendly_found.erase(friendly)
 
 ## PAIN
 
