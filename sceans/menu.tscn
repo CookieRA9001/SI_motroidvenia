@@ -1,0 +1,143 @@
+[gd_scene load_steps=18 format=3 uid="uid://bolpryfgxfbnf"]
+
+[ext_resource type="Texture2D" uid="uid://daxuc7xna2e2s" path="res://assets/ui/1_sky.png" id="1_hsvdj"]
+[ext_resource type="Shader" path="res://assets/shader/scroll.gdshader" id="2_lg1ld"]
+[ext_resource type="Texture2D" uid="uid://b3ju64aukcjcb" path="res://assets/ui/2_stars.png" id="3_3u1gs"]
+[ext_resource type="Texture2D" uid="uid://m48k7dom3eym" path="res://assets/ui/planets.png" id="4_mct20"]
+[ext_resource type="Texture2D" uid="uid://cmee23uw6t7v" path="res://assets/ui/4_platforms.png" id="4_s8mci"]
+[ext_resource type="Texture2D" uid="uid://b3x287s5nq0d6" path="res://assets/ui/6_mc.png" id="5_pa755"]
+[ext_resource type="Texture2D" uid="uid://8lhwd6vaaaps" path="res://assets/ui/5_friendly.png" id="6_klagc"]
+[ext_resource type="Texture2D" uid="uid://bc4gb8pawoe1t" path="res://assets/ui/name-w_guys.png" id="9_2t1ay"]
+[ext_resource type="Texture2D" uid="uid://bwofam5cspvf0" path="res://assets/ui/buttons.png" id="9_skoc4"]
+[ext_resource type="Script" path="res://scripts/play.gd" id="10_to2qh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o6b1b"]
+shader = ExtResource("2_lg1ld")
+shader_parameter/x_speed = 0.03
+shader_parameter/y_speed = -0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_meabd"]
+shader = ExtResource("2_lg1ld")
+shader_parameter/x_speed = 0.05
+shader_parameter/y_speed = -0.01
+
+[sub_resource type="InputEventAction" id="InputEventAction_u0dwm"]
+action = &"jump"
+
+[sub_resource type="Shortcut" id="Shortcut_3aho6"]
+events = [SubResource("InputEventAction_u0dwm")]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egorl"]
+atlas = ExtResource("9_skoc4")
+region = Rect2(100.265, 100.386, 99.8717, 99.6143)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lc0w"]
+atlas = ExtResource("9_skoc4")
+region = Rect2(200.507, 100.386, 99.4702, 99.8557)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hs8jt"]
+atlas = ExtResource("9_skoc4")
+region = Rect2(200.507, 100.386, 99.4702, 99.8557)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sky" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_hsvdj")
+
+[node name="Stars" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_o6b1b")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_3u1gs")
+
+[node name="Planet" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_meabd")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -333.0
+offset_top = -5.0
+offset_bottom = 238.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_mct20")
+stretch_mode = 6
+
+[node name="Platform" type="TextureRect" parent="."]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_s8mci")
+stretch_mode = 6
+
+[node name="Spaceboy" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_pa755")
+stretch_mode = 6
+
+[node name="Friend" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_klagc")
+stretch_mode = 6
+
+[node name="Title" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.5
+anchor_bottom = 0.5
+texture = ExtResource("9_2t1ay")
+stretch_mode = 5
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.55
+anchor_right = 0.4
+anchor_bottom = 0.85
+shortcut = SubResource("Shortcut_3aho6")
+texture_normal = SubResource("AtlasTexture_egorl")
+texture_pressed = SubResource("AtlasTexture_2lc0w")
+texture_hover = SubResource("AtlasTexture_egorl")
+texture_disabled = SubResource("AtlasTexture_hs8jt")
+texture_focused = SubResource("AtlasTexture_egorl")
+stretch_mode = 4
+script = ExtResource("10_to2qh")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]

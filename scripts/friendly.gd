@@ -55,7 +55,7 @@ func inAction(delta):
 		animation_player.play("trown")
 		velocity = velocity.bounce(collision.get_normal()) * 0.75
 		$bounce.play()
-		if abs(velocity.x)+abs(velocity.y) < 15:
+		if abs(velocity.x)+abs(velocity.y) < 20:
 			friendly_status = Status.MOVING
 			
 	projectile.disabled = (abs(velocity.x)+abs(velocity.y) < 10)

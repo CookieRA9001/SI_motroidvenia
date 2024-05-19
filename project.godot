@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="SI_metroidvenia"
-run/main_scene="res://sceans/startingLevel.tscn"
+run/main_scene="res://sceans/menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://Assets/resources/icon.svg"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
 
 [dotnet]
 
