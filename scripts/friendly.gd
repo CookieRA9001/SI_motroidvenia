@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 enum Status { IDLE, FOLLOWING, INACTION, MOVING, HELD }
 @onready var animation_player = $AnimationPlayer
-@onready var projectile = $Projectile/Projectile
+@onready var projectile:CollisionShape2D = $Projectile/Projectile
 @export var jumpY_velocity := -400
 @export var jumpX_velocity := 200
 @export var jumpX_decel := 10
@@ -40,6 +40,8 @@ func inAction(delta):
 		$bounce.play()
 		if abs(velocity.x)+abs(velocity.y) < 15:
 			friendly_status = Status.MOVING
+			
+	projectile.disabled = (abs(velocity.x)+abs(velocity.y) < 10)
 
 func hold(delta):
 	if position.distance_to(target.position) > 50:
@@ -51,6 +53,9 @@ func _physics_process(delta):
 	if not is_on_floor() and not friendly_status==Status.HELD:
 		velocity.y += gravity * delta
 		animation_player.play("idle")
+		
+	if friendly_status != Status.INACTION and !projectile.disabled:
+		projectile.disabled = true
 	
 	match friendly_status:
 		Status.IDLE:
