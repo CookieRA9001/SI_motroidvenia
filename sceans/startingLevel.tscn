@@ -1450,7 +1450,7 @@ position = Vector2(-759, -136)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-2, 0)
-limit_bottom = 2500
+limit_bottom = 3000
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
@@ -1687,3 +1687,6 @@ layer = 3
 
 [node name="Boss" parent="." instance=ExtResource("38_a1r5f")]
 position = Vector2(11855, 2220)
+
+[node name="Friendly5" parent="." instance=ExtResource("4_t6vhu")]
+position = Vector2(3447, 1887)
