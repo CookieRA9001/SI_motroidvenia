@@ -7,8 +7,3 @@ func _ready():
 	hearts_container.setMaxHearts(player.maxHealth)
 	hearts_container.updateHearts(player.currentHealth)
 	player.healthChanged.connect(hearts_container.updateHearts)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

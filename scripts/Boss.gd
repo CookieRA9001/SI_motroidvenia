@@ -23,12 +23,13 @@ var rome_states = [EnemyStates.IDLE, EnemyStates.MOVE, EnemyStates.MOVE]
 @onready var attack_ray_cast_l = $hitBox/RayCastL
 @onready var ray_cast_ld = $RayCastLD
 @onready var ray_cast_rd = $RayCastRD
-var path_r: bool = true
-var path_l: bool = true
 var allyCollisions = []
+
 func _ready():
 	hitbox_collision_shape.disabled = true
 	$zombie.play()
+	attack_ray_cast_l.enabled = true
+	attack_ray_cast_r.enabled = false
 
 func _process(delta):
 	velocity.x = move_toward(velocity.x,0,delta)
@@ -43,34 +44,18 @@ func _process(delta):
 	match enemy_status:
 		EnemyStates.MOVE:
 			animated_sprite.play("run")
-			if ray_cast_rd.is_colliding():
-				path_r = true
-			else:
-				path_r = false
-			if path_r == false:
+			
+			if ray_cast_rd.is_colliding() == false or ray_cast_r.is_colliding():
 				direction = -1
 				animated_sprite.flip_h = false
 				attack_ray_cast_l.enabled = true
 				attack_ray_cast_r.enabled = false
-			if ray_cast_r.is_colliding():
-				direction = -1
-				animated_sprite.flip_h = false
-				attack_ray_cast_l.enabled = true
-				attack_ray_cast_r.enabled = false
-			if ray_cast_ld.is_colliding():
-				path_l = true
-			else:
-				path_l = false
-			if path_l == false:
+			elif ray_cast_ld.is_colliding() == false or ray_cast_l.is_colliding():
 				direction = 1
 				animated_sprite.flip_h = true
 				attack_ray_cast_l.enabled = false
 				attack_ray_cast_r.enabled = true
-			if ray_cast_l.is_colliding():
-				direction = 1
-				animated_sprite.flip_h = true
-				attack_ray_cast_r.enabled = true
-				attack_ray_cast_l.enabled = false
+				
 			velocity.x = direction * speed
 		EnemyStates.IDLE:
 			animated_sprite.play("idle")
