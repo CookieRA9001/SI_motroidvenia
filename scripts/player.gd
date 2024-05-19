@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal healthChanged
 @onready var timer = $hurtbox/Timer
 @onready var animation_timer = $effects/animationTimer
 @onready var coyote_timer = $Timers/CoyoteTimer
@@ -126,6 +127,7 @@ func hurtByEnemy(area:Area2D):
 		#print("You died!")
 		isHurt = true
 		knockback(area)
+		healthChanged.emit(currentHealth)
 		Engine.time_scale = 0.5
 		effects.play("hurtBlink")
 		timer.start()
@@ -135,6 +137,7 @@ func hurtByEnemy(area:Area2D):
 		return
 		
 	knockback(area)
+	healthChanged.emit(currentHealth)
 	hurtBlink()
 
 func hurtBlink():

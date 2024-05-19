@@ -1,9 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://c5qflkv4jyqfd"]
+[gd_scene load_steps=22 format=3 uid="uid://c5qflkv4jyqfd"]
 
 [ext_resource type="Script" path="res://scripts/Boss.gd" id="1_0bkwq"]
 [ext_resource type="Texture2D" uid="uid://qkre32ai2kis" path="res://assets/para_1.png" id="2_hk36j"]
-[ext_resource type="AudioStream" uid="uid://7egw5rqtubli" path="res://assets/hurt_c_08-102842.mp3" id="3_gqimp"]
-[ext_resource type="AudioStream" uid="uid://bdpj3hsvuaotx" path="res://assets/zombies-79561.mp3" id="4_swe3l"]
+[ext_resource type="AudioStream" path="res://assets/hurt_c_08-102842.mp3" id="3_gqimp"]
+[ext_resource type="AudioStream" path="res://assets/zombies-79561.mp3" id="4_swe3l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qf6rf"]
 atlas = ExtResource("2_hk36j")
@@ -144,7 +144,9 @@ _data = {
 "hurtBlink": SubResource("Animation_2mjgb")
 }
 
-[node name="Enemy" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ih3v7"]
+
+[node name="Boss" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_0bkwq")
 
@@ -241,4 +243,14 @@ stream = ExtResource("4_swe3l")
 volume_db = -0.533
 max_distance = 300.0
 
+[node name="killally" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killally"]
+position = Vector2(2, 36)
+scale = Vector2(4.27553, 9.3398)
+shape = SubResource("CapsuleShape2D_ih3v7")
+
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="killally" to="." method="_on_killally_body_entered"]
