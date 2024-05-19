@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
-enum Status { IDLE, FOLLOWING, INACTION, MOVING, HELD }
+enum Status { IDLE, FOLLOWING, INACTION, MOVING, HELD, FLYBACK }
 @onready var animation_player = $AnimationPlayer
 @onready var projectile:CollisionShape2D = $Projectile/Projectile
+@onready var hitbox = $Hitbox
 @export var jumpY_velocity := -400
 @export var jumpX_velocity := 200
 @export var jumpX_decel := 10
@@ -22,17 +23,33 @@ func follow():
 		friendly_status = Status.MOVING
 
 func move():
-	if is_on_floor():
+	if position.distance_to(target.position) > 500:
+		friendly_status = Status.FLYBACK
+		velocity = Vector2.ZERO
+	elif is_on_floor():
 		friendly_status = Status.FOLLOWING
 		velocity.x = 0
 		return
 	else:
 		velocity.x = current_x_speed
 
+func flyBack(delta):
+	if position.distance_to(target.position) > 100 or position.y > target.position.y-20:
+		position = position.move_toward(target.position+Vector2(0,-30), delta*700)
+		hitbox.disabled = true
+	else:
+		friendly_status = Status.MOVING
+		hitbox.disabled = false
+
 func idle():
 	pass
 	
 func inAction(delta):
+	if position.distance_to(target.position) > 1000:
+		friendly_status = Status.FLYBACK
+		velocity = Vector2.ZERO
+		return
+		
 	var collision = move_and_collide(velocity * delta * 2)
 	if collision:
 		animation_player.play("trown")
@@ -46,11 +63,12 @@ func inAction(delta):
 func hold(delta):
 	if position.distance_to(target.position) > 50:
 		position = position.move_toward(target.position, delta*300)
+		
 	else:
 		position = target.position
 
 func _physics_process(delta):
-	if not is_on_floor() and not friendly_status==Status.HELD:
+	if not is_on_floor() and not (friendly_status==Status.HELD or friendly_status==Status.FLYBACK):
 		velocity.y += gravity * delta
 		animation_player.play("idle")
 		
@@ -68,6 +86,8 @@ func _physics_process(delta):
 			move()
 		Status.HELD:
 			hold(delta)
+		Status.FLYBACK:
+			flyBack(delta)
 			
 	if friendly_status != Status.INACTION:
 		move_and_slide()
@@ -95,3 +115,4 @@ func _on_area_2d_body_entered(body):
 		
 		if body.has_method("add_friendly"):
 			body.add_friendly(self)
+			
