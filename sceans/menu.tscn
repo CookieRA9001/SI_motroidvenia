@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bolpryfgxfbnf"]
+[gd_scene load_steps=19 format=3 uid="uid://bolpryfgxfbnf"]
 
 [ext_resource type="Texture2D" uid="uid://daxuc7xna2e2s" path="res://assets/ui/1_sky.png" id="1_hsvdj"]
 [ext_resource type="Shader" path="res://assets/shader/scroll.gdshader" id="2_lg1ld"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bc4gb8pawoe1t" path="res://assets/ui/name-w_guys.png" id="9_2t1ay"]
 [ext_resource type="Texture2D" uid="uid://bwofam5cspvf0" path="res://assets/ui/buttons.png" id="9_skoc4"]
 [ext_resource type="Script" path="res://scripts/play.gd" id="10_to2qh"]
+[ext_resource type="AudioStream" uid="uid://dvdtny2f4pf6q" path="res://assets/audio/boss music 3.mp3" id="11_s25re"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o6b1b"]
 shader = ExtResource("2_lg1ld")
@@ -139,5 +140,10 @@ texture_focused = SubResource("AtlasTexture_egorl")
 stretch_mode = 4
 script = ExtResource("10_to2qh")
 metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_s25re")
+volume_db = -20.0
+autoplay = true
 
 [connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]

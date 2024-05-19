@@ -76,7 +76,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 		animation_player.play("idle")
 		
-	if friendly_status != Status.INACTION and !projectile.disabled:
+	if friendly_status != Status.FLYBACK and !projectile.disabled:
 		projectile.disabled = true
 	
 	match friendly_status:
