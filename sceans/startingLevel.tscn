@@ -9453,7 +9453,7 @@ autoplay = true
 position = Vector2(1, 224)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
-position = Vector2(307, 2083)
+position = Vector2(9838, 3086)
 shape = SubResource("WorldBoundaryShape2D_gvj57")
 
 [node name="1Sky" type="Sprite2D" parent="."]
