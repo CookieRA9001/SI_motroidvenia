@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://cwibv5imo5t7y"]
 
-[ext_resource type="Texture2D" uid="uid://bpnptyodf06pb" path="res://assets/e.png" id="1_6nnc1"]
+[ext_resource type="Texture2D" uid="uid://dmxvorb1b0g33" path="res://assets/graffiti1.png" id="1_m3y4t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_urq7k"]
-atlas = ExtResource("1_6nnc1")
+atlas = ExtResource("1_m3y4t")
 region = Rect2(199.734, 3.6657, 99.0846, 97.928)
 
 [node name="TeadyBear" type="Sprite2D"]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://dl5la4ixlq2o"]
 
-[ext_resource type="Texture2D" uid="uid://bpnptyodf06pb" path="res://assets/e.png" id="1_px5ua"]
+[ext_resource type="Texture2D" uid="uid://dmxvorb1b0g33" path="res://assets/graffiti1.png" id="1_albu5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_urq7k"]
-atlas = ExtResource("1_px5ua")
-region = Rect2(106.434, 6.69868, 88.2894, 89.8316)
+atlas = ExtResource("1_albu5")
+region = Rect2(106.434, 6.69868, 95.1087, 89.8316)
 
 [node name="TeadyBear" type="Sprite2D"]
 z_index = -1
