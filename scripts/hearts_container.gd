@@ -5,12 +5,8 @@ extends HBoxContainer
 func _ready():
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-func setMaxHearts(max: int):
-	for i in range(max):
+func setMaxHearts(max_heath: int):
+	for i in range(max_heath):
 		var heart = HeartGuiClass.instantiate()
 		add_child(heart)
 	
