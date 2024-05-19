@@ -83,7 +83,7 @@ func swap_friends():
 		new_f_index = (new_f_index+1) % len(friendly_found)
 		next_friendly = friendly_found[new_f_index]
 	
-	if new_f_index == f_index and position.distance_to(next_friendly.position)>80:
+	if new_f_index == f_index or position.distance_to(next_friendly.position)>80:
 		return
 	
 	if held_friendly!=null and held_friendly.has_method("unholdMe"):
