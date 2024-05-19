@@ -1420,7 +1420,7 @@ position = Vector2(-759, -136)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-2, 0)
-limit_bottom = 21000000
+limit_bottom = 2300
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0

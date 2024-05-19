@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SI_metroidvenia"
-run/main_scene="res://sceans/TestLevel.tscn"
+run/main_scene="res://sceans/startingLevel.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://Assets/resources/icon.svg"
 
