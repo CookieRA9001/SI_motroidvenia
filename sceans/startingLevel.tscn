@@ -28,7 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://c02f3alxstr00" path="res://sceans/objects/obj21.tscn" id="26_xqp5i"]
 [ext_resource type="PackedScene" uid="uid://bgd2l80uqjh4o" path="res://sceans/objects/obj27.tscn" id="27_t7r0g"]
 [ext_resource type="PackedScene" uid="uid://dg6g1udm35mrd" path="res://sceans/tutorial/a.tscn" id="28_w7qgj"]
-[ext_resource type="PackedScene" uid="uid://dd1yl5hhedeot" path="res://sceans/tutorial/ok.tscn" id="29_j8ejp"]
+[ext_resource type="PackedScene" path="res://sceans/tutorial/ok.tscn" id="29_j8ejp"]
 [ext_resource type="PackedScene" uid="uid://dl5la4ixlq2o" path="res://sceans/tutorial/d.tscn" id="30_5popt"]
 [ext_resource type="PackedScene" uid="uid://b0o8o3k3n5j1o" path="res://sceans/tutorial/space.tscn" id="31_0bvad"]
 [ext_resource type="PackedScene" uid="uid://cwibv5imo5t7y" path="res://sceans/tutorial/e.tscn" id="32_af7lh"]

@@ -11,7 +11,7 @@ var rome_states = [EnemyStates.IDLE, EnemyStates.MOVE, EnemyStates.MOVE]
 @onready var timer = $hurtbox/Timer
 @export var speed = 60
 @export var attack_dash = 200
-@export var maxHealth = 10
+@export var maxHealth = 6
 @onready var ray_cast_r = $RayCastR
 @onready var ray_cast_l = $RayCastL
 @onready var animated_sprite = $AnimatedSprite2D
@@ -117,4 +117,10 @@ func _on_hurtbox_area_entered(area):
 			queue_free()
 			return
 		hurtBlink()
+
+
+
+func _on_killally_body_entered(body):
+	print(body)
+	body.queue_free()
 
