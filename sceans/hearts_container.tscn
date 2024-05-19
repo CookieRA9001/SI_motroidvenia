@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://sceans/hearts_container.gd" id="1_4vjxc"]
 
 [node name="heartsContainer" type="HBoxContainer"]
+layout_direction = 3
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/separation = 4

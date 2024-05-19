@@ -1,6 +1,7 @@
-[gd_scene load_steps=40 format=3 uid="uid://d2a8rwlnesfpe"]
+[gd_scene load_steps=43 format=3 uid="uid://d2a8rwlnesfpe"]
 
 [ext_resource type="Texture2D" uid="uid://bc84ecg3ecvm" path="res://assets/tileset_ig_1.png" id="1_awxv7"]
+[ext_resource type="Script" path="res://sceans/startingLevel.gd" id="1_w3dm3"]
 [ext_resource type="Texture2D" uid="uid://bwps4se7ycnmq" path="res://assets/lamp_floor_tileset.png" id="2_xka87"]
 [ext_resource type="PackedScene" uid="uid://cn1ekgvxk3vpw" path="res://sceans/player.tscn" id="3_x3ske"]
 [ext_resource type="PackedScene" uid="uid://7hxhebt7dcb0" path="res://sceans/friendly_ally.tscn" id="4_t6vhu"]
@@ -28,13 +29,15 @@
 [ext_resource type="PackedScene" uid="uid://c02f3alxstr00" path="res://sceans/objects/obj21.tscn" id="26_xqp5i"]
 [ext_resource type="PackedScene" uid="uid://bgd2l80uqjh4o" path="res://sceans/objects/obj27.tscn" id="27_t7r0g"]
 [ext_resource type="PackedScene" uid="uid://dg6g1udm35mrd" path="res://sceans/tutorial/a.tscn" id="28_w7qgj"]
-[ext_resource type="PackedScene" uid="uid://dd1yl5hhedeot" path="res://sceans/tutorial/ok.tscn" id="29_j8ejp"]
+[ext_resource type="PackedScene" path="res://sceans/tutorial/ok.tscn" id="29_j8ejp"]
 [ext_resource type="PackedScene" uid="uid://dl5la4ixlq2o" path="res://sceans/tutorial/d.tscn" id="30_5popt"]
 [ext_resource type="PackedScene" uid="uid://b0o8o3k3n5j1o" path="res://sceans/tutorial/space.tscn" id="31_0bvad"]
 [ext_resource type="PackedScene" uid="uid://cwibv5imo5t7y" path="res://sceans/tutorial/e.tscn" id="32_af7lh"]
 [ext_resource type="PackedScene" uid="uid://cscowkcdwlrul" path="res://sceans/tutorial/q.tscn" id="33_a1f7l"]
 [ext_resource type="PackedScene" uid="uid://br75qpfw7fbb4" path="res://sceans/tutorial/w.tscn" id="34_wadwd"]
 [ext_resource type="PackedScene" uid="uid://djnre00pnpnh0" path="res://sceans/tutorial/s.tscn" id="35_k7eyv"]
+[ext_resource type="PackedScene" uid="uid://dhjrm1s1jojbc" path="res://sceans/hearts_container.tscn" id="37_lnfjk"]
+[ext_resource type="PackedScene" uid="uid://c5qflkv4jyqfd" path="res://sceans/Boss.tscn" id="38_a1r5f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_grjpa"]
 texture = ExtResource("1_awxv7")
@@ -1416,6 +1419,7 @@ sources/1 = SubResource("TileSetAtlasSource_oy4n0")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gvj57"]
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_w3dm3")
 
 [node name="1Sky" type="Sprite2D" parent="."]
 z_index = -2
@@ -1675,3 +1679,11 @@ position = Vector2(1603, 718)
 
 [node name="TeadyBear11" parent="tutorial grafity" instance=ExtResource("33_a1f7l")]
 position = Vector2(1695, 856)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="heartsContainer" parent="CanvasLayer" instance=ExtResource("37_lnfjk")]
+
+[node name="Boss" parent="." instance=ExtResource("38_a1r5f")]
+position = Vector2(11855, 2220)
