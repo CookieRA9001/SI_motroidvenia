@@ -118,8 +118,6 @@ func _on_hurtbox_area_entered(area):
 			return
 		hurtBlink()
 
-
-
 func _on_killally_body_entered(body):
 	print(body)
 	body.queue_free()
